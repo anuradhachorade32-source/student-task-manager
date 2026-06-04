@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>Students</h2>
+
+<table 
+    id="students_table" 
+    class="table table-bordered table-striped table-hover"
+>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for record in attendance_list %}
+        <tr>
+            <td>{{ record.attendance_id }}</td>
+            <td>{{ record.first_name }} {{ record.last_name }}</td>
+            <td>{{ record.course_name }}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Attendance</h2>
+
+<form action="/save_attendance" method="POST">
+
+    <label>Student</label>
+
+    <select name="student_id" class="form-control">
+
+        {% for student in students %}
+        <option value="{{ student.student_id }}">
+            {{ student.first_name }} {{ student.last_name }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Status</label>
+
+    <select name="attendance_status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Save Attendance</button>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+        
